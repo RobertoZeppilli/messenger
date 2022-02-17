@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
             setLoading(false)
         })
         return () => {
-            setUser(null); // This worked for me
+            setUser(null)
             setLoading(true)
         };
     }, [])

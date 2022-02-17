@@ -7,8 +7,8 @@ import AuthProvider from './context/auth';
 import PrivateRoute from './private-routes/PrivateRoute'
 
 // COMPONENTS & PAGES
-import { Home, Login, Register } from './pages/pages-container/pages-container'
 import { Navbar } from './components/components-container/components-container'
+import { Home, Login, Register, Profile } from './pages/pages-container/pages-container'
 
 function App() {
   return (
@@ -23,6 +23,15 @@ function App() {
               element={
                 <PrivateRoute>
                   <Home />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact="true"
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
                 </PrivateRoute>
               }
             />
