@@ -1,8 +1,12 @@
+// STUFF FROM REACT
 import { createContext, useEffect, useState } from "react";
+
+// FIREBASE STUFF
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
-import { Loading } from '../components/components-container/components-container'
 
+// COMPONENTS
+import { Loading } from '../components/components-container/components-container'
 
 export const AuthContext = createContext()
 

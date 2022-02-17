@@ -1,8 +1,11 @@
+// REACT STUFF AND REACT-ROUTER
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
+
+// FIREBASE STUFF
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '../firebase'
 import { setDoc, doc, Timestamp } from 'firebase/firestore'
-import { useNavigate } from 'react-router'
 
 const Register = () => {
     const [data, setData] = useState({

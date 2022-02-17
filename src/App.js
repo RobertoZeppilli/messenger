@@ -1,12 +1,12 @@
+// STUFF FROM REACT AND REACT-ROUTER-DOM
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Fragment } from 'react';
-import AuthProvider from './context/auth';
 
-// import Home from './pages/Home'
-// // import Navbar from './components/Navbar'
-// import Register from './pages/Register';
-// import Login from './pages/Login';
+// AUTH PROVIDER & PRIVATE-ROUTE
+import AuthProvider from './context/auth';
 import PrivateRoute from './private-routes/PrivateRoute'
+
+// COMPONENTS & PAGES
 import { Home, Login, Register } from './pages/pages-container/pages-container'
 import { Navbar } from './components/components-container/components-container'
 

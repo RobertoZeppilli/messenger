@@ -1,9 +1,14 @@
+// REACT STUFF & REACT-ROUTER-DOM
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
+// FIREBASE STUFF
 import { auth, db } from '../firebase'
 import { signOut } from 'firebase/auth'
 import { doc, updateDoc } from 'firebase/firestore'
-import { useNavigate } from 'react-router-dom'
+
+// CONTEXT
 import { AuthContext } from '../context/auth'
 
 const Navbar = () => {
