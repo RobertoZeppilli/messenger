@@ -7,7 +7,7 @@ import Navbar from './components/Navbar'
 import Register from './pages/Register';
 import Login from './pages/Login';
 
-import PrivateRoute from './components/PrivateRoute'
+import PrivateRoute from './private-routes/PrivateRoute'
 
 function App() {
   return (
