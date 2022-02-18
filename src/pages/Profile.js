@@ -3,9 +3,10 @@ import Camera from '../components/svg/Camera'
 import Trash from '../components/svg/Trash'
 import Img from '../image.jpg'
 import { storage, db, auth } from '../firebase'
-import { ref, getDownloadURL, uploadBytes, deleteObject } from 'firebase/storage'
+import { ref, deleteObject } from 'firebase/storage'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
+import { uploadImg } from '../functions/functions'
 
 const Profile = () => {
     const [img, setImg] = useState("")
@@ -21,31 +22,7 @@ const Profile = () => {
         })
 
         if (img) {
-            const uploadImg = async () => {
-                const imgRef = ref(storage, `avatar/${new Date().getTime()} - ${img.name}`)
-                try {
-
-                    if (user.avatarPath) {
-                        await deleteObject(ref(storage, user.avatarPath))
-                    }
-                    const snap = await uploadBytes(imgRef, img)
-                    const url = await getDownloadURL(ref(storage, snap.ref.fullPath))
-
-                    await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-                        avatar: url,
-                        avatarPath: snap.ref.fullPath
-                    })
-
-                    setImg("")
-                    console.log(snap.ref.fullPath)
-                    console.log(url)
-
-                } catch (error) {
-                    console.log(error.message)
-                }
-
-            }
-            uploadImg()
+            uploadImg(img, user, setImg)
         }
     }, [img])
 
