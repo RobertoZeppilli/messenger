@@ -21,27 +21,32 @@ const User = ({ user, user1, selectUser, chat }) => {
 
 
     return (
-        <div className={`user_wrapper ${chat.name === user.name && 'selected_user'}`} onClick={() => selectUser(user)}>
-            <div className="user_info">
-                <div className="user_detail">
-                    <img src={user.avatar || Img} alt="avatar" className="avatar" />
-                    <h4>{user.name}</h4>
-                    {lastMessage && lastMessage.from !== user1 && lastMessage.unread && (<small className="unread">
-                        New
-                    </small>)}
-                </div>
-                <div className={`user_status ${user.isOnline ? 'online' : 'offline'}`}>
+        <>
+            <div className={`user_wrapper ${chat.name === user.name && 'selected_user'}`} onClick={() => selectUser(user)}>
+                <div className="user_info">
+                    <div className="user_detail">
+                        <img src={user.avatar || Img} alt="avatar" className="avatar" />
+                        <h4>{user.name}</h4>
+                        {lastMessage && lastMessage.from !== user1 && lastMessage.unread && (<small className="unread">
+                            New
+                        </small>)}
+                    </div>
+                    <div className={`user_status ${user.isOnline ? 'online' : 'offline'}`}>
 
+                    </div>
+                </div>
+                <div>
+                    {lastMessage && (
+                        <p className="truncate">
+                            <strong>{lastMessage.from === user1 ? "Me:" : null}</strong>
+                            {lastMessage.message}
+                        </p>)}
                 </div>
             </div>
-            <div>
-                {lastMessage && (
-                    <p className="truncate">
-                        <strong>{lastMessage.from === user1 ? "Me:" : null}</strong>
-                        {lastMessage.message}
-                    </p>)}
+            <div onClick={() => selectUser(user)} className={`sm_container ${chat.name === user.name && 'selected_user'}`} >
+                <img src={user.avatar || Img} alt={user.name} className="avatar sm_screen" />
             </div>
-        </div>
+        </>
     )
 }
 

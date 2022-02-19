@@ -44,13 +44,15 @@ const Home = () => {
       setMessages(msgs)
     })
 
+    // get last message only if there has been a past conversation b/w the logged in user and the conversation opened
+    // checking if docSnap.data() is true, solves the error when two users that never talk to each other are trying to click on the user avatar to start a conversation
     const docSnap = await getDoc(doc(db, 'lastMessage', id))
-    if(docSnap.data().from !== user1) {
+    if(docSnap.data() && docSnap.data().from !== user1) {
       await updateDoc(doc(db, 'lastMessage', id), {
         unread: false
       })
     }
-    
+
   }
 
   const sendMessage = async (e) => {
