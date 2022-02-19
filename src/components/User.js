@@ -26,15 +26,20 @@ const User = ({ user, user1, selectUser, chat }) => {
                 <div className="user_detail">
                     <img src={user.avatar || Img} alt="avatar" className="avatar" />
                     <h4>{user.name}</h4>
+                    {lastMessage && lastMessage.from !== user1 && lastMessage.unread && (<small className="unread">
+                        New
+                    </small>)}
                 </div>
                 <div className={`user_status ${user.isOnline ? 'online' : 'offline'}`}>
 
                 </div>
             </div>
             <div>
-                {lastMessage && <p className="truncate">
-                    {lastMessage.message}
-                </p>}
+                {lastMessage && (
+                    <p className="truncate">
+                        <strong>{lastMessage.from === user1 ? "Me:" : null}</strong>
+                        {lastMessage.message}
+                    </p>)}
             </div>
         </div>
     )

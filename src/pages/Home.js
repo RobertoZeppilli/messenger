@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { db, auth, storage } from '../firebase'
-import { collection, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc } from 'firebase/firestore'
+import { collection, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { User, MessageForm, Message } from '../components/components-container/components-container'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 
@@ -28,7 +28,7 @@ const Home = () => {
     return () => unSub()
   }, [])
 
-  const selectUser = (user) => {
+  const selectUser = async (user) => {
     setChat(user)
 
     const user2 = user.uid
@@ -43,6 +43,14 @@ const Home = () => {
       })
       setMessages(msgs)
     })
+
+    const docSnap = await getDoc(doc(db, 'lastMessage', id))
+    if(docSnap.data().from !== user1) {
+      await updateDoc(doc(db, 'lastMessage', id), {
+        unread: false
+      })
+    }
+    
   }
 
   const sendMessage = async (e) => {
