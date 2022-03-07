@@ -3,6 +3,7 @@ import { db, auth, storage } from '../firebase'
 import { collection, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { User, MessageForm, Message } from '../components/components-container/components-container'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
+import Img from '../image.jpg'
 
 const Home = () => {
   const [users, setUsers] = useState([])
@@ -47,7 +48,7 @@ const Home = () => {
     // get last message only if there has been a past conversation b/w the logged in user and the conversation opened
     // checking if docSnap.data() is true, solves the error when two users that never talk to each other are trying to click on the user avatar to start a conversation
     const docSnap = await getDoc(doc(db, 'lastMessage', id))
-    if(docSnap.data() && docSnap.data().from !== user1) {
+    if (docSnap.data() && docSnap.data().from !== user1) {
       await updateDoc(doc(db, 'lastMessage', id), {
         unread: false
       })
@@ -100,6 +101,7 @@ const Home = () => {
         {chat ?
           <>
             <div className="messages_user">
+              <img className="messages_user_picture" src={chat.avatar || Img} alt={chat.name} />
               <h3>{chat.name}</h3>
             </div>
             <div className="messages">
