@@ -9,18 +9,21 @@ const Message = ({ message, user1 }) => {
     }, [message])
 
     return (
-        <div className={`message_wrapper ${message.from === user1 ? 'own' : ''}`} ref={scrollRef}>
-            <p className={`${message.from === user1 ? 'me' : 'friend'}`}>
-                {message.media ? <img src={message.media} alt={message.text} /> : null}
-                {message.message}
-                <br />
-                <small>
-                    <Moment fromNow>
-                        {message.createdAt.toDate()}
-                    </Moment>
-                </small>
-            </p>
-        </div>
+        <>
+            <div className={`message_wrapper ${message.from === user1 ? 'own' : ''}`}>
+                <p className={`${message.from === user1 ? 'me' : 'friend'}`}>
+                    {message.media ? <img src={message.media} alt={message.text} /> : null}
+                    {message.message}
+                    <br />
+                    <small>
+                        <Moment fromNow>
+                            {message.createdAt.toDate()}
+                        </Moment>
+                    </small>
+                </p>
+            </div>
+            <div ref={scrollRef}></div>
+        </>
     )
 }
 
