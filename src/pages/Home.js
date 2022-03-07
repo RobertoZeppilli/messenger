@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { db, auth, storage } from '../firebase'
 import { collection, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
-import { User, MessageForm, Message } from '../components/components-container/components-container'
+import { User, MessageForm, Message, Navbar } from '../components/components-container/components-container'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import Img from '../image.jpg'
 
@@ -91,26 +91,30 @@ const Home = () => {
   }
 
   return (
-    <div className="home_container">
-      <div className="users_container">
-        {users.map(user => (
-          <User key={user.uid} user={user} user1={user1} selectUser={selectUser} chat={chat} />
-        ))}
+    <>
+      <Navbar />
+
+      <div className="home_container">
+        <div className="users_container">
+          {users.map(user => (
+            <User key={user.uid} user={user} user1={user1} selectUser={selectUser} chat={chat} />
+          ))}
+        </div>
+        <div className="messages_container">
+          {chat ?
+            <>
+              <div className="messages_user">
+                <img className="messages_user_picture" src={chat.avatar || Img} alt={chat.name} />
+                <h3>{chat.name}</h3>
+              </div>
+              <div className="messages">
+                {messages.length ? messages.map((message, index) => <Message key={index} message={message} user1={user1} />) : ""}
+              </div>
+              <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} />
+            </> : <h3 className="no_conv">Select a user to start a conversation</h3>}
+        </div>
       </div>
-      <div className="messages_container">
-        {chat ?
-          <>
-            <div className="messages_user">
-              <img className="messages_user_picture" src={chat.avatar || Img} alt={chat.name} />
-              <h3>{chat.name}</h3>
-            </div>
-            <div className="messages">
-              {messages.length ? messages.map((message, index) => <Message key={index} message={message} user1={user1} />) : ""}
-            </div>
-            <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} />
-          </> : <h3 className="no_conv">Select a user to start a conversation</h3>}
-      </div>
-    </div>
+    </>
   )
 }
 

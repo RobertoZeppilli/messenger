@@ -39,16 +39,16 @@ const MessageForm = ({ sendMessage, message, setMessage, setMedia }) => {
                 <Attachment />
             </label>
             <input onChange={(e) => setMedia(e.target.files[0])} type="file" id="image" accept="image/*" style={{ display: "none" }} />
-            <div onClick={() => setChooseEmoji(true)}>
-                {chooseEmoji ? <div className="emoji-table" ref={emojiRef}>
-                    <Picker
-                        exclude={["search"]}
-                        theme="dark"
-                        onSelect={addEmoji}
-                        style={{ position: 'absolute', bottom: '50%', right: '50%' }}
-                    />
-                </div> : <FiSmile size={20}/>}
-            </div>
+            <FiSmile style={{ cursor: "pointer" }} size={20} onClick={() => setChooseEmoji(true)} />
+
+            {chooseEmoji && <div className="emoji-table" ref={emojiRef}>
+                <Picker
+                    exclude={["search"]}
+                    theme="dark"
+                    onSelect={addEmoji}
+                    style={{ position: 'absolute', bottom: '50%', right: '50%' }}
+                />
+            </div>}
             <div className="main_input">
                 <input type="text" placheolder="Enter Message..." value={message} onChange={(e) => setMessage(e.target.value)} />
             </div>

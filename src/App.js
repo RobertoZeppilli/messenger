@@ -7,15 +7,16 @@ import AuthProvider from './context/auth';
 import PrivateRoute from './private-routes/PrivateRoute'
 
 // COMPONENTS & PAGES
-import { Navbar } from './components/components-container/components-container'
+// import { Navbar } from './components/components-container/components-container'
 import { Home, Login, Register, Profile } from './pages/pages-container/pages-container'
+
+import './index.css'
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Fragment>
-          <Navbar />
           <Routes>
             <Route
               exact="true"
