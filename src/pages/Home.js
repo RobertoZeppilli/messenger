@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { db, auth, storage } from '../firebase'
-import { collection, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
+import { collection, getDocs, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { User, MessageForm, Message, Navbar } from '../components/components-container/components-container'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import Img from '../image.jpg'
@@ -13,8 +13,6 @@ const Home = () => {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
   const [media, setMedia] = useState("")
-
-  console.log(messages)
 
   const user1 = auth.currentUser.uid
 
@@ -99,8 +97,24 @@ const Home = () => {
     setMedia("")
   }
 
-  const deleteMessage = (message) => {
-    
+  const deleteMessage = async (msg) => {
+    // const user2 = user.uid
+    const user2 = chat.uid
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
+    const msgRef = collection(db, 'messages', id, 'chat')
+    console.log(msgRef)
+    const Query = query(msgRef, orderBy('createdAt', 'asc'))
+
+    onSnapshot(Query, querySnapshot => {
+      // let msgs = []
+      querySnapshot.forEach(doc => {
+        // msgs.push(doc.data())
+        console.log(doc.id, doc.data())
+      })
+      // setMessages(msgs)
+    })
+
+    // Ho il doc.id che servira per cancellare il messaggio!!!
   }
 
 
