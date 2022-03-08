@@ -46,7 +46,7 @@ const MessageForm = ({ sendMessage, message, setMessage, setMedia }) => {
                     exclude={["search"]}
                     theme="dark"
                     onSelect={addEmoji}
-                    style={{ position: 'absolute', bottom: '50%', right: '50%' }}
+                    style={{ position: 'absolute', top: '50%', right: '50%' }}
                 />
             </div>}
             <div className="main_input">

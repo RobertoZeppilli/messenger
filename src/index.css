@@ -16,8 +16,6 @@
 }
 
 
-
-
 /* Profile */
 .profile_container {
 display: flex;
@@ -56,107 +54,27 @@ flex-grow: 1;
 text-align: left;
 }
 
-
-
-
-
-/* .messages_container {
-position: relative;
-width: 100%;
-} */
-/* .messages_user {
-padding: 10px;
-text-align: center;
-display: flex;
-align-items: center;
-gap: 1.2em;
-justify-content: center;
-border-bottom: 2px solid var(--color-6);
-} */
-.messages_user_picture {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-
-}
-
-.no_conv {
-font-size: 20px;
-color: var(--color-4);
-text-align: center;
-}
 .message_form {
-position: absolute;
-bottom: 0;
-left: 20%;
 width: 100%;
-height: 30px;
 display: flex;
 align-items: center;
-}
-.message_form input {
-width: 40vw;
-margin: 0px 10px 10px;
-padding: 10px;
-border-radius: 5px;
-outline: none;
-border: none;
+justify-content: center;
+background-color: red;
 }
 
-.message_form .btn {
-margin-top: -10px;
+.myMessages {
+    height: calc(100vh - 264px);
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-/* .emoji-table {
-    position: absolute;
-    bottom: 50%;
-    left: 10px;
-} */
-.messages {
-height: calc(100vh - 200px);
-overflow-y: auto;
-/* border-bottom: 1px solid var(--color-6); */
-padding: 1.5rem;
-display: flex;
-flex-direction: column;
-align-items: center;
+.myProfile {
+    height: 100px;
 }
-/* .message_wrapper {
-margin-top: 5px;
-padding: 0px 5px;
-} */
-.message_wrapper img {
-width: 100%;
-border-radius: 5px;
-}
-.message_wrapper p {
-padding: 10px;
-display: inline-block;
-max-width: 50%;
-text-align: left;
-border-radius: 5px;
-}
-.message_wrapper small {
-display: inline-block;
-margin-top: 15px;
-opacity: 0.8;
-}
-.message_wrapper.own {
-text-align: right;
-}
-.me {
-background: var(--color-3);
-color: white;
-}
-.friend {
-background: var(--color-6);
-}
-.selected_user {
-background: var(--color-6);
-}
-
-.truncate strong {
-margin-right: 10px;
+.myForm {
+    height: 100px;
 }
 .unread {
 margin-left: 10px;

@@ -5,6 +5,8 @@ import { User, MessageForm, Message, Navbar } from '../components/components-con
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import Img from '../image.jpg'
 
+import { styles } from './styles'
+
 const Home = () => {
   const [users, setUsers] = useState([])
   const [chat, setChat] = useState("")
@@ -91,27 +93,29 @@ const Home = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className={styles.homeContainer}>
       <Navbar />
 
-      <div className="grid-container grid grid-cols-5 flex-grow">
-        <div className="col-span-1 bg-zinc-200">
+      <div className={styles.gridWrapper}>
+        <div className={styles.usersContainer}>
           {users.map(user => (
             <User key={user.uid} user={user} user1={user1} selectUser={selectUser} chat={chat} />
           ))}
         </div>
-        <div className="col-span-4 bg-zinc-300">
+        <div className={styles.chatWrapper}>
           {chat ?
-            <>
-              <div className="bg-zinc-300 border-b-2 border-zinc-500 flex items-center justify-center gap-2 py-2">
-                <img className="h-12 w-12 rounded-full object-cover" src={chat.avatar || Img} alt={chat.name} />
+            <div className={styles.chatContainer}>
+              <div className={styles.chatProfile}>
+                <img className={styles.chatProfileAvatar} src={chat.avatar || Img} alt={chat.name} />
                 <h3 className="font-semibold">{chat.name}</h3>
               </div>
-              <div className="messages bg-zinc-900">
+              <div className={styles.chatMessages}>
                 {messages.length ? messages.map((message, index) => <Message key={index} message={message} user1={user1} />) : ""}
               </div>
-              <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} />
-            </> : <h3 className="no_conv">Select a user to start a conversation</h3>}
+              <div className={styles.chatForm}>
+                <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} />
+              </div>
+            </div> : <h3 className={styles.noChat}>Select a user to start a conversation</h3>}
         </div>
       </div>
     </div>

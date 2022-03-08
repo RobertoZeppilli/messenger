@@ -51,6 +51,61 @@ const container = `
     p-2
 `
 
+const homeContainer = `
+    flex flex-col h-screen
+`
+
+const gridWrapper = `
+    grid-container
+    grid
+    grid-cols-5
+    flex-grow
+`
+const usersContainer = `
+    col-span-1
+    bg-zinc-200
+`
+
+const chatWrapper = `
+    col-span-4
+    overflow-hidden
+    bg-zinc-900
+`
+
+const chatContainer = `
+    flex flex-col
+    h-full
+`
+const chatProfile = `
+    myProfile
+    bg-red-300
+    flex items-center justify-center
+    gap-2
+`
+const chatProfileAvatar = `
+    h-12 w-12
+    rounded-full
+    object-cover
+`
+const chatMessages = `
+    myMessages
+    messages
+    bg-green-300
+    overflow-y-auto
+`
+
+const chatForm = `
+    myForm
+    bg-red-300
+    flex items-center justify-center
+`
+const noChat = `
+    text-white
+    font-bold
+    text-3xl
+    text-center
+    py-4
+`
 export const styles = {
     form,
     label,
@@ -58,6 +113,16 @@ export const styles = {
     container,
     formActions,
     formButton,
-    error
+    error,
+    homeContainer,
+    gridWrapper,
+    usersContainer,
+    chatWrapper,
+    chatContainer,
+    chatProfile,
+    chatProfileAvatar,
+    chatMessages,
+    chatForm,
+    noChat,
 }
 
