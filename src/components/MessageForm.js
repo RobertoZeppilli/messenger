@@ -56,7 +56,7 @@ const MessageForm = ({ sendMessage, message, setMessage, setMedia }) => {
                 />
             </div>}
 
-            <input className={styles.messageInput} type="text" placheolder="Enter Message..." value={message} onChange={(e) => setMessage(e.target.value)} />
+            <input className={styles.messageInput} type="text" placheolder="Enter Message..." value={message} onChange={(e) => setMessage(e.target.value.trimStart())} />
 
             <div>
                 <button className="text-red-300">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { db, auth, storage } from '../firebase'
-import { collection, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
+import { collection, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { User, MessageForm, Message, Navbar } from '../components/components-container/components-container'
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 import Img from '../image.jpg'
@@ -13,6 +13,8 @@ const Home = () => {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
   const [media, setMedia] = useState("")
+
+  console.log(messages)
 
   const user1 = auth.currentUser.uid
 
@@ -62,6 +64,10 @@ const Home = () => {
 
     e.preventDefault()
 
+    if (!media && !message) {
+      return
+    }
+
     const user2 = chat.uid
 
     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
@@ -90,7 +96,13 @@ const Home = () => {
       unread: true
     })
     setMessage("")
+    setMedia("")
   }
+
+  const deleteMessage = (message) => {
+    
+  }
+
 
   return (
     <div className={styles.homeContainer}>
@@ -110,7 +122,7 @@ const Home = () => {
                 <h3 className="font-semibold">{chat.name}</h3>
               </div>
               <div className={styles.chatMessages}>
-                {messages.length ? messages.map((message, index) => <Message key={index} message={message} user1={user1} />) : ""}
+                {messages.length ? messages.map((message, index) => <Message key={index} message={message} user1={user1} deleteMessage={deleteMessage} />) : ""}
               </div>
               <div className={styles.chatForm}>
                 <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} />

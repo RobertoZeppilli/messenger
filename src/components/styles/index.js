@@ -9,18 +9,13 @@ const logo = `
     text-white
 `
 const navButtonNoMargin = `
-    ml-5
     hover:text-red-300
     transition duration-150 ease-in-out
-    font-bold
-    p-1
 `
 const navButtonMargin = `
-    ml-5
+    ml-3
     hover:text-red-300
     transition duration-150 ease-in-out
-    font-bold
-    p-1
 `
 const userBox = `
     bg-zinc-900
@@ -31,8 +26,9 @@ const userBox = `
     border-red-200
 `
 const selectedUserBox = `
-    bg-zinc-700
     cursor-pointer
+    bg-zinc-600
+    text-white
 `
 const flexCenter = `
     flex items-center justify-between

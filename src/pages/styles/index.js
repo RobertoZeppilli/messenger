@@ -24,7 +24,6 @@ const form = `
     rounded
     px-8 pt-6 pb-8 mb-4
 `
-
 const error = `
     text-red-500 text-xs italic
 `
@@ -45,18 +44,15 @@ const formButton = `
     focus:shadow-outline
     transition duration-150 ease-in-out
 `
-
 const container = `
     h-screen
     bg-zinc-800
     flex items-center justify-center
     p-2
 `
-
 const homeContainer = `
     flex flex-col h-screen
 `
-
 const gridWrapper = `
     grid-container
     grid
@@ -67,13 +63,11 @@ const usersContainer = `
     col-span-1
     bg-zinc-700
 `
-
 const chatWrapper = `
     col-span-4
     overflow-hidden
     bg-zinc-900
 `
-
 const chatContainer = `
     flex flex-col
     h-full
@@ -103,15 +97,36 @@ const chatForm = `
 const noChat = `
     text-white
     font-bold
-    text-3xl
+    sm:text-3xl
     text-center
-    py-4
+    p-4
 `
-
 const otherPage = `
     text-red-400
     hover:text-red-500
     transition duration-150 ease-in-out
+`
+
+const profileContainer = `
+    bg-zinc-800
+    flex items-center justify-center
+    p-2
+`
+const profileBox = `
+    flex flex-col
+    items-center
+    sm:flex-row
+    border-4
+    border-red-400 p-4
+`
+const imageContainer = `
+    img_container
+    sm:mr-3 mb-2 sm:mb-0
+`
+const userEmail = `
+    italic
+    py-2
+    border-b border-red-400
 `
 export const styles = {
     form,
@@ -131,6 +146,10 @@ export const styles = {
     chatMessages,
     chatForm,
     noChat,
-    otherPage
+    otherPage,
+    profileContainer,
+    profileBox,
+    imageContainer,
+    userEmail
 }
 

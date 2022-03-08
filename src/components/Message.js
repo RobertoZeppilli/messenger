@@ -3,7 +3,7 @@ import Moment from 'react-moment'
 
 import { styles } from './styles'
 
-const Message = ({ message, user1 }) => {
+const Message = ({ message, user1, deleteMessage }) => {
     const scrollRef = useRef(null)
 
     useEffect(() => {
@@ -16,6 +16,7 @@ const Message = ({ message, user1 }) => {
                 <p className={`${styles.message} ${message.from === user1 ? styles.myMessage : styles.senderMessage}`}>
                     {message.media ? <img className="h-12 w-12" src={message.media} alt={message.text} /> : null}
                     {message.message}
+                    {message.from === user1 && <span onClick={() => deleteMessage(message)} className="text-red-200 cursor-pointer">del</span>}
                 </p>
                 <small className="text-zinc-300 italic">
                     <Moment fromNow>

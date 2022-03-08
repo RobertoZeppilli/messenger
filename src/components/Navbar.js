@@ -12,8 +12,10 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { AuthContext } from '../context/auth'
 
 //STYLES
-
 import { styles } from './styles'
+
+import { AiOutlineUser } from 'react-icons/ai'
+import { FiLogOut } from 'react-icons/fi'
 
 const Navbar = () => {
 
@@ -34,10 +36,14 @@ const Navbar = () => {
             <h3 className={styles.logo}>
                 <Link to="/">Messenger</Link>
             </h3>
-            <div className="text-white">
+            <div className="text-white flex items-center">
                 {user ? <>
-                    <Link to="/profile" className={styles.navButtonNoMargin}>Profile</Link>
-                    <button className={styles.navButtonMargin} onClick={handleSignout}>Logout</button>
+                    <Link to="/profile" className={styles.navButtonNoMargin}>
+                        <AiOutlineUser size={20} />
+                    </Link>
+                    <button className={styles.navButtonMargin} onClick={handleSignout}>
+                        <FiLogOut size={20} />
+                    </button>
                 </> :
                     <>
                         <Link className={styles.navButtonNoMargin} to="/register">Register</Link>
