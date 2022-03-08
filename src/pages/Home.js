@@ -91,30 +91,30 @@ const Home = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col h-screen">
       <Navbar />
 
-      <div className="home_container">
-        <div className="users_container">
+      <div className="grid-container grid grid-cols-5 flex-grow">
+        <div className="col-span-1 bg-zinc-200">
           {users.map(user => (
             <User key={user.uid} user={user} user1={user1} selectUser={selectUser} chat={chat} />
           ))}
         </div>
-        <div className="messages_container">
+        <div className="col-span-4 bg-zinc-300">
           {chat ?
             <>
-              <div className="messages_user">
-                <img className="messages_user_picture" src={chat.avatar || Img} alt={chat.name} />
-                <h3>{chat.name}</h3>
+              <div className="bg-zinc-300 border-b-2 border-zinc-500 flex items-center justify-center gap-2 py-2">
+                <img className="h-12 w-12 rounded-full object-cover" src={chat.avatar || Img} alt={chat.name} />
+                <h3 className="font-semibold">{chat.name}</h3>
               </div>
-              <div className="messages">
+              <div className="messages bg-zinc-900">
                 {messages.length ? messages.map((message, index) => <Message key={index} message={message} user1={user1} />) : ""}
               </div>
               <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} />
             </> : <h3 className="no_conv">Select a user to start a conversation</h3>}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

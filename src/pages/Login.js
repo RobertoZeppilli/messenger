@@ -22,9 +22,12 @@ const Login = () => {
 
     const { email, password, error, loading } = data
 
-    function handleChange(e) {
-        setData({ ...data, [e.target.name]: e.target.value })
-    }
+    // function handleChange(value) {
+    //     // const { name, value } = e
+    //     // console.log(name, value)
+    //     setData({ ...data, email: value, password: value })
+    //     console.log(value)
+    // }
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -41,6 +44,7 @@ const Login = () => {
             })
 
             setData({ email: '', password: '', error: null, loading: false })
+
             navigate('/')
         } catch (err) {
             setData({ ...data, error: err.message.replace(/[^\w\s]/gi, ' ') })
@@ -61,7 +65,7 @@ const Login = () => {
                         type="email"
                         autoComplete='off'
                         value={email}
-                        onChange={handleChange}
+                        onChange={(e) => setData({ ...data, email: e.target.value })}
                         placeholder="Email"
                     />
                 </div>
@@ -75,16 +79,16 @@ const Login = () => {
                         name="password"
                         autoComplete='off'
                         value={password}
-                        onChange={handleChange}
+                        onChange={(e) => setData({ ...data, password: e.target.value })}
                         placeholder="******************"
                     />
                 </div>
                 {error ? <p className={styles.error}>{error}</p> : ''}
                 <div className={styles.formActions}>
-                    <button className={styles.formButton} type="button" disabled={loading}>
+                    <button className={styles.formButton} type="submit" disabled={loading}>
                         {loading ? "Logging in..." : 'Login'}
                     </button>
-                    <small>Not registered? <Link to="/register"><a className="text-red-400">Register</a></Link></small>
+                    <small>Not registered? <Link to="/register">Register</Link></small>
                 </div>
             </form>
 

@@ -11,6 +11,10 @@ import { doc, updateDoc } from 'firebase/firestore'
 // CONTEXT
 import { AuthContext } from '../context/auth'
 
+//STYLES
+
+import { styles } from './styles'
+
 const Navbar = () => {
 
     const { user } = useContext(AuthContext)
@@ -26,18 +30,18 @@ const Navbar = () => {
     }
 
     return (
-        <nav>
-            <h3>
+        <nav className={styles.navbar}>
+            <h3 className={styles.logo}>
                 <Link to="/">Messenger</Link>
             </h3>
-            <div>
+            <div className="text-white">
                 {user ? <>
-                    <Link to="/profile">Profile</Link>
-                    <button className="btn" onClick={handleSignout}>Logout</button>
+                    <Link to="/profile" className={styles.navButtonNoMargin}>Profile</Link>
+                    <button className={styles.navButtonMargin} onClick={handleSignout}>Logout</button>
                 </> :
                     <>
-                        <Link to="/register">Register</Link>
-                        <Link to="/login">Login</Link>
+                        <Link className={styles.navButtonNoMargin} to="/register">Register</Link>
+                        <Link className={styles.navButtonMargin} to="/login">Login</Link>
                     </>}
             </div>
         </nav>

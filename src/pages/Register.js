@@ -79,7 +79,7 @@ const Register = () => {
                     <button className={styles.formButton} type="button" disabled={loading}>
                         {loading ? "Registering..." : 'Register'}
                     </button>
-                    <small>Have an account? <Link to="/login"><a className="text-red-400">Login</a></Link></small>
+                    <small>Have an account? <Link to="/login">Login</Link></small>
                 </div>
             </form>
 

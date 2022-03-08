@@ -3,6 +3,8 @@ import Img from '../image.jpg'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 
+import { styles } from './styles'
+
 
 const User = ({ user, user1, selectUser, chat }) => {
     const user2 = user?.uid
@@ -12,8 +14,6 @@ const User = ({ user, user1, selectUser, chat }) => {
         const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
         let unSub = onSnapshot(doc(db, 'lastMessage', id), (doc) => {
             setLastMessage(doc.data())
-            console.log("RENDERS")
-            // console.log("FROM USEEFFECT", data)
         })
 
         return () => unSub()
@@ -22,17 +22,14 @@ const User = ({ user, user1, selectUser, chat }) => {
 
     return (
         <>
-            <div className={`user_wrapper ${chat.name === user.name && 'selected_user'}`} onClick={() => selectUser(user)}>
-                <div className="user_info">
-                    <div className="user_detail">
-                        <img src={user.avatar || Img} alt="avatar" className="avatar" />
-                        <h4>{user.name}</h4>
-                        {lastMessage && lastMessage.from !== user1 && lastMessage.unread && (<small className="unread">
+            <div className={`${styles.userBox} ${chat.name === user.name && styles.selectedUserBox}`} onClick={() => selectUser(user)}>
+                <div className={styles.flexCenter}>
+                    <div>
+                        <img src={user.avatar || Img} alt="avatar" className={`${styles.avatar} ${user.isOnline ? "border-green-500" : "border-red-500"}`} />
+                        <h4 className="hidden">{user.name}</h4>
+                        {lastMessage && lastMessage.from !== user1 && lastMessage.unread && (<small className="text-sm">
                             New
                         </small>)}
-                    </div>
-                    <div className={`user_status ${user.isOnline ? 'online' : 'offline'}`}>
-
                     </div>
                 </div>
                 <div>
@@ -42,9 +39,6 @@ const User = ({ user, user1, selectUser, chat }) => {
                             {lastMessage.message}
                         </p>)}
                 </div>
-            </div>
-            <div onClick={() => selectUser(user)} className={`sm_container ${chat.name === user.name && 'selected_user'}`} >
-                <img src={user.avatar || Img} alt={user.name} className="avatar sm_screen" />
             </div>
         </>
     )
