@@ -54,13 +54,6 @@ flex-grow: 1;
 text-align: left;
 }
 
-.message_form {
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-background-color: red;
-}
 
 .myMessages {
     height: calc(100vh - 264px);
@@ -83,9 +76,9 @@ color: white;
 padding: 2px 4px;
 border-radius: 10px;
 }
-.sm_screen {
+/* .sm_screen {
 display: none;
-}
+} */
 @media screen and (max-width: 767px) {
     .home_container {
         grid-template-columns: 2fr 3fr;

@@ -1,6 +1,6 @@
 const navbar = `
     flex items-center justify-between
-    bg-red-500
+    bg-zinc-700
     p-4
 `
 const logo = `
@@ -11,30 +11,28 @@ const logo = `
 
 const navButtonNoMargin = `
     ml-5
-    hover:bg-white hover:text-red-500
+    hover:text-red-300
     transition duration-150 ease-in-out
     font-bold
     p-1
-    rounded-full
 `
 const navButtonMargin = `
     ml-5
-    hover:bg-white hover:text-red-500
+    hover:text-red-300
     transition duration-150 ease-in-out
     font-bold
     p-1
-    rounded-full
 `
 
 const userBox = `
-    bg-zinc-200
+    bg-zinc-900
     cursor-pointer
-    py-3 px-2
-    border-b-2 border-zinc-500
+    py-4 px-2
+    text-white
 `
 const selectedUserBox = `
-    bg-zinc-500
-    border-zinc-200
+    bg-zinc-700
+    cursor-pointer
 `
 
 const flexCenter = `
@@ -42,10 +40,10 @@ const flexCenter = `
 `
 
 const avatar = `
-    h-12 w-12
+    h-10 w-10
     rounded-full
     object-cover
-    border-2 bg-white
+    border-4 bg-white
 `
 const sender = `
     self-start text-left
@@ -60,12 +58,12 @@ const message = `
 `
 
 const myMessage = `
-    bg-red-400
+    bg-red-300
     text-white
     font-semibold
 `
 const senderMessage = `
-    bg-green-400
+    bg-zinc-900
     text-white
     font-semibold
 `

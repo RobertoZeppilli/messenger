@@ -63,7 +63,7 @@ const gridWrapper = `
 `
 const usersContainer = `
     col-span-1
-    bg-zinc-200
+    bg-zinc-700
 `
 
 const chatWrapper = `
@@ -78,7 +78,7 @@ const chatContainer = `
 `
 const chatProfile = `
     myProfile
-    bg-red-300
+    text-red-300
     flex items-center justify-center
     gap-2
 `
@@ -89,14 +89,13 @@ const chatProfileAvatar = `
 `
 const chatMessages = `
     myMessages
-    messages
-    bg-green-300
+    bg-zinc-700
     overflow-y-auto
 `
 
 const chatForm = `
     myForm
-    bg-red-300
+    bg-zinc-900
     flex items-center justify-center
 `
 const noChat = `

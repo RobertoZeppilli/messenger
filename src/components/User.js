@@ -24,9 +24,9 @@ const User = ({ user, user1, selectUser, chat }) => {
         <>
             <div className={`${styles.userBox} ${chat.name === user.name && styles.selectedUserBox}`} onClick={() => selectUser(user)}>
                 <div className={styles.flexCenter}>
-                    <div>
+                    <div className="flex items-center gap-3">
                         <img src={user.avatar || Img} alt="avatar" className={`${styles.avatar} ${user.isOnline ? "border-green-500" : "border-red-500"}`} />
-                        <h4 className="hidden">{user.name}</h4>
+                        <h4 className="hidden lg:inline-flex lg:font-semibold lg:text-red-300">{user.name}</h4>
                         {lastMessage && lastMessage.from !== user1 && lastMessage.unread && (<small className="text-sm">
                             New
                         </small>)}
@@ -34,8 +34,8 @@ const User = ({ user, user1, selectUser, chat }) => {
                 </div>
                 <div>
                     {lastMessage && (
-                        <p className="truncate">
-                            <strong>{lastMessage.from === user1 ? "Me:" : null}</strong>
+                        <p className="truncate mt-2">
+                            <span className={`${lastMessage.from === user1 && "mr-3"}`}>{lastMessage.from === user1 ? "Me:" : null}</span>
                             {lastMessage.message}
                         </p>)}
                 </div>
