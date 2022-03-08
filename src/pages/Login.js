@@ -88,7 +88,7 @@ const Login = () => {
                     <button className={styles.formButton} type="submit" disabled={loading}>
                         {loading ? "Logging in..." : 'Login'}
                     </button>
-                    <small>Not registered? <Link to="/register">Register</Link></small>
+                    <small>Not registered? <Link to="/register" className="text-red-400 hover:text-red-500">Register</Link></small>
                 </div>
             </form>
 

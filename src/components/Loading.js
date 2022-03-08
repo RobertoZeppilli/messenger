@@ -1,9 +1,10 @@
 import React from 'react'
+import { FaSpinner } from 'react-icons/fa'
 
 const Loading = () => {
   return (
-    <div style={{position: "relative"}}>
-        <h2 style={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)",}}>Loading...</h2>
+    <div className="bg-zinc-700 h-screen text-red-300 flex items-center justify-center" style={{ position: "relative" }}>
+      <FaSpinner className="animate-spin" size={50} />
     </div>
   )
 }

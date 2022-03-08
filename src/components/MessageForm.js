@@ -6,6 +6,7 @@ import { Picker } from 'emoji-mart'
 import { FiSmile } from 'react-icons/fi'
 import { BsUpload } from "react-icons/bs"
 import { FiSend } from 'react-icons/fi'
+import { styles } from './styles'
 
 const MessageForm = ({ sendMessage, message, setMessage, setMedia }) => {
     const [chooseEmoji, setChooseEmoji] = useState(false)
@@ -35,7 +36,7 @@ const MessageForm = ({ sendMessage, message, setMessage, setMedia }) => {
     }, [emojiRef]);
 
     return (
-        <form className="w-full flex items-center justify-center gap-3 p-3" onSubmit={sendMessage} >
+        <form className={styles.form} onSubmit={sendMessage} >
 
             <label htmlFor="image">
                 <BsUpload className="text-red-300" style={{ cursor: "pointer" }} size={20} />
@@ -46,17 +47,16 @@ const MessageForm = ({ sendMessage, message, setMessage, setMedia }) => {
                 <FiSmile className="text-red-300" style={{ cursor: "pointer" }} size={20} onClick={() => setChooseEmoji(true)} />
             </label>
 
-            {chooseEmoji && <div className="emoji-table" ref={emojiRef}>
+            {chooseEmoji && <div className={styles.emojiPicker} ref={emojiRef}>
                 <Picker
                     exclude={["search"]}
                     theme="dark"
                     onSelect={addEmoji}
-                    style={{ position: 'absolute', top: '50%', right: '50%', transform: "translate(-50%, -50%)" }}
+                    onClick={() => setChooseEmoji(false)}
                 />
             </div>}
 
-            <input className="w-3/4 focus:outline-none
-    focus:shadow-outline p-2" type="text" placheolder="Enter Message..." value={message} onChange={(e) => setMessage(e.target.value)} />
+            <input className={styles.messageInput} type="text" placheolder="Enter Message..." value={message} onChange={(e) => setMessage(e.target.value)} />
 
             <div>
                 <button className="text-red-300">

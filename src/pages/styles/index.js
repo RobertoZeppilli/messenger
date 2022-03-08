@@ -9,12 +9,14 @@ const input = `
     leading-tight
     focus:outline-none
     focus:shadow-outline
+    caret-red-400
 `
 const label = `
     block
     text-gray-700
     text-sm font-bold
     mb-2
+    text-red-400
 `
 const form = `
     bg-white
@@ -33,8 +35,8 @@ const formActions = `
     items-center justify-between
 `
 const formButton = `
-    bg-red-500
-    hover:bg-red-700
+    bg-red-400
+    hover:bg-red-500
     w-full text-white
     font-bold
     py-2 px-4
@@ -46,7 +48,7 @@ const formButton = `
 
 const container = `
     h-screen
-    bg-red-400
+    bg-zinc-800
     flex items-center justify-center
     p-2
 `
@@ -105,6 +107,12 @@ const noChat = `
     text-center
     py-4
 `
+
+const otherPage = `
+    text-red-400
+    hover:text-red-500
+    transition duration-150 ease-in-out
+`
 export const styles = {
     form,
     label,
@@ -123,5 +131,6 @@ export const styles = {
     chatMessages,
     chatForm,
     noChat,
+    otherPage
 }
 
