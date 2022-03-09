@@ -22,13 +22,8 @@ const Login = () => {
 
     const { email, password, error, loading } = data
 
-    // function handleChange(value) {
-    //     // const { name, value } = e
-    //     // console.log(name, value)
-    //     setData({ ...data, email: value, password: value })
-    //     console.log(value)
-    // }
 
+    // #TODO refactor this function
     async function handleSubmit(e) {
         e.preventDefault()
 

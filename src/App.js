@@ -4,11 +4,10 @@ import { Fragment } from 'react';
 
 // AUTH PROVIDER & PRIVATE-ROUTE
 import AuthProvider from './context/auth';
-import PrivateRoute from './private-routes/PrivateRoute'
+// import PrivateRoute from './private-routes/PrivateRoute'
 
 // COMPONENTS & PAGES
-// import { Navbar } from './components/components-container/components-container'
-import { Home, Login, Register, Profile } from './pages/pages-container/pages-container'
+import { Home, Login, Register, Profile, PrivateRoute } from './pages'
 
 import './index.css'
 

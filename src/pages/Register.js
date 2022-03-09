@@ -27,6 +27,7 @@ const Register = () => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
+    // #TODO refactor this function
     async function handleSubmit(e) {
         e.preventDefault()
 

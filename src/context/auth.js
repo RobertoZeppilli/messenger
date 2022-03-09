@@ -6,7 +6,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 
 // COMPONENTS
-import { Loading } from '../components/components-container/components-container'
+import { Loading } from '../components'
 
 export const AuthContext = createContext()
 

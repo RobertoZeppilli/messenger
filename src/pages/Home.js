@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { db, auth } from '../firebase'
 import { collection, query, where, onSnapshot } from 'firebase/firestore'
-import { User, MessageForm, Message, Navbar } from '../components/components-container/components-container'
+import { User, MessageForm, Message, Navbar } from '../components'
 
-import Img from '../image.jpg'
+import Img from '../assets/image.jpg'
 
 import { styles } from './styles'
 
-import { deleteMessage, sendMessage, selectUser } from '../functions/functions'
+import { deleteMessage, sendMessage, selectUser } from '../functions'
 
 const Home = () => {
   const [users, setUsers] = useState([])

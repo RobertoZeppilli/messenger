@@ -18,20 +18,16 @@ const MessageForm = ({ sendMessage, message, setMessage, setMedia, media, chat, 
         setMessage(message + emoji);
     };
 
+
+    // #TODO refactor this function
     useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
         function handleClickOutside(event) {
             if (emojiRef.current && !emojiRef.current.contains(event.target)) {
                 setChooseEmoji(false)
             }
         }
-
-        // Bind the event listener
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            // Unbind the event listener on clean up
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [emojiRef]);

@@ -23,6 +23,8 @@ const Navbar = () => {
 
     const navigate = useNavigate()
 
+
+    // #TODO refactor this function
     async function handleSignout() {
         await updateDoc(doc(db, 'users', user.uid), {
             isOnline: false

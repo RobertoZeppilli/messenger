@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import Camera from '../components/svg/Camera'
-import Trash from '../components/svg/Trash'
-import Img from '../image.jpg'
+
+import { Camera, Trash } from '../components'
+import Img from '../assets/image.jpg'
+
 import { storage, db, auth } from '../firebase'
 import { ref, deleteObject } from 'firebase/storage'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
+
 import { useNavigate } from 'react-router-dom'
-import { uploadImg } from '../functions/functions'
+import { uploadImg } from '../functions'
 
 import { styles } from './styles'
 import '../index.css'
 
-import { Navbar, Loading } from '../components/components-container/components-container'
+import { Navbar, Loading } from '../components'
 
 const Profile = () => {
     const [img, setImg] = useState("")

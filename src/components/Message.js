@@ -8,8 +8,6 @@ import { TiDelete } from 'react-icons/ti'
 const Message = ({ message, user1, deleteMessage, chat }) => {
     const scrollRef = useRef(null)
 
-    // console.log(message)
-
     useEffect(() => {
         scrollRef.current && scrollRef.current.scrollIntoView({ behavior: "smooth" })
     }, [message])
