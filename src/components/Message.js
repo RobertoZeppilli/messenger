@@ -5,7 +5,7 @@ import { styles } from './styles'
 
 import { TiDelete } from 'react-icons/ti'
 
-const Message = ({ message, user1, deleteMessage }) => {
+const Message = ({ message, user1, deleteMessage, chat }) => {
     const scrollRef = useRef(null)
 
     // console.log(message)
@@ -20,7 +20,7 @@ const Message = ({ message, user1, deleteMessage }) => {
                 <p className={`${styles.message} ${message.from === user1 ? styles.myMessage : styles.senderMessage}`}>
                     {message.media ? <img className="h-12 w-12" src={message.media} alt={message.text} /> : null}
                     {message.message}
-                    {message.from === user1 && <span onClick={() => deleteMessage(message.messageID)} className={styles.deleteButton}>
+                    {message.from === user1 && <span onClick={() => deleteMessage(message.messageID, chat, user1)} className={styles.deleteButton}>
                         <TiDelete size={20} />
                     </span>}
                 </p>

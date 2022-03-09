@@ -6,7 +6,7 @@ import { db } from '../firebase'
 import { styles } from './styles'
 
 
-const User = ({ user, user1, selectUser, chat }) => {
+const User = ({ user, user1, setChat, setChatMessages, selectUser, chat }) => {
     const user2 = user?.uid
     const [lastMessage, setLastMessage] = useState()
 
@@ -22,7 +22,7 @@ const User = ({ user, user1, selectUser, chat }) => {
 
     return (
         <>
-            <div className={`${styles.userBox} ${chat.name === user.name && styles.selectedUserBox}`} onClick={() => selectUser(user)}>
+            <div className={`${styles.userBox} ${chat.name === user.name && styles.selectedUserBox}`} onClick={() => selectUser(user, user1, setChat, setChatMessages)}>
                 <div className={styles.flexCenter}>
                     <div className={styles.profileInfo}>
                         <img src={user.avatar || Img} alt="avatar" className={`${styles.avatar} ${user.isOnline ? "border-green-500" : "border-red-500"}`} />

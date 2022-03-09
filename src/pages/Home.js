@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { db, auth, storage } from '../firebase'
-import { collection, getDocs, query, where, onSnapshot, addDoc, Timestamp, orderBy, setDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
+import { db, auth } from '../firebase'
+import { collection, query, where, onSnapshot } from 'firebase/firestore'
 import { User, MessageForm, Message, Navbar } from '../components/components-container/components-container'
-import { ref, getDownloadURL, uploadBytes } from 'firebase/storage'
+
 import Img from '../image.jpg'
 
 import { styles } from './styles'
+
+import { deleteMessage, sendMessage, selectUser } from '../functions/functions'
 
 const Home = () => {
   const [users, setUsers] = useState([])
@@ -13,12 +15,8 @@ const Home = () => {
   const [message, setMessage] = useState("")
   const [chatMessages, setChatMessages] = useState([])
   const [media, setMedia] = useState("")
-  // const [docId, setDocId] = useState("")
 
   const user1 = auth.currentUser.uid
-
-  // console.log(chatMessages?.conversations)
-  // console.log(docId)
 
   // query al db per chiamare tutti gli utenti tranne noi che siamo auth
   useEffect(() => {
@@ -35,85 +33,6 @@ const Home = () => {
     return () => unSub()
   }, [])
 
-  const selectUser = async (user) => {
-    setChat(user)
-
-    const user2 = user.uid
-    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
-    const msgRef = collection(db, 'messages', id, 'chat')
-    const Query = query(msgRef, orderBy('createdAt', 'asc'))
-
-    onSnapshot(Query, querySnapshot => {
-      let msgs = []
-      querySnapshot.forEach(doc => {
-        // const { message } = doc.data()
-        const message = doc.data()
-        message.messageID = doc.id
-        // doc.data().id = doc.id
-        console.log("DOC ", message)
-        msgs.push(message)
-      })
-      setChatMessages(msgs)
-    })
-
-    // get last message only if there has been a past conversation b/w the logged in user and the conversation opened
-    // checking if docSnap.data() is true, solves the error when two users that never talk to each other are trying to click on the user avatar to start a conversation
-    const docSnap = await getDoc(doc(db, 'lastMessage', id))
-    if (docSnap.data() && docSnap.data().from !== user1) {
-      await updateDoc(doc(db, 'lastMessage', id), {
-        unread: false
-      })
-    }
-
-  }
-
-  const sendMessage = async (e) => {
-
-    e.preventDefault()
-
-    if (!media && !message) {
-      return
-    }
-
-    const user2 = chat.uid
-
-    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
-
-    let url;
-    if (media) {
-      const mediaRef = ref(storage, `images/${new Date().getTime()} - ${media.name}`)
-      const snap = await uploadBytes(mediaRef, media)
-      const newUrl = await getDownloadURL(ref(storage, snap.ref.fullPath))
-      url = newUrl
-    }
-
-    await addDoc(collection(db, 'messages', id, 'chat'), {
-      message,
-      from: user1,
-      to: user2,
-      media: url || "",
-      createdAt: Timestamp.fromDate(new Date())
-    })
-    await setDoc(doc(db, 'lastMessage', id), {
-      message,
-      from: user1,
-      to: user2,
-      media: url || "",
-      createdAt: Timestamp.fromDate(new Date()),
-      unread: true
-    })
-    setMessage("")
-    setMedia("")
-  }
-
-  const deleteMessage = async (messageID) => {
-    const user2 = chat.uid
-    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
-
-    return await deleteDoc(doc(db, "messages", id, "chat", messageID))
-
-  }
-
 
   return (
     <div className={styles.homeContainer}>
@@ -122,7 +41,8 @@ const Home = () => {
       <div className={styles.gridWrapper}>
         <div className={styles.usersContainer}>
           {users.map(user => (
-            <User key={user.uid} user={user} user1={user1} selectUser={selectUser} chat={chat} />
+            <User key={user.uid} user={user} user1={user1} selectUser={selectUser} chat={chat}
+            setChat={setChat} setChatMessages={setChatMessages} />
           ))}
         </div>
         <div className={styles.chatWrapper}>
@@ -133,10 +53,10 @@ const Home = () => {
                 <h3 className="font-semibold">{chat.name}</h3>
               </div>
               <div className={styles.chatMessages}>
-                {chatMessages ? chatMessages.map((message, index) => <Message key={index} message={message} user1={user1} deleteMessage={deleteMessage} />) : ""}
+                {chatMessages ? chatMessages.map((message, index) => <Message key={index} message={message} user1={user1} deleteMessage={deleteMessage} chat={chat} />) : ""}
               </div>
               <div className={styles.chatForm}>
-                <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} />
+                <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} media={media} chat={chat} user1={user1} />
               </div>
             </div> : <h3 className={styles.noChat}>Select a user to start a conversation</h3>}
         </div>

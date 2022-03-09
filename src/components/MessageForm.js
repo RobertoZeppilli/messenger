@@ -8,9 +8,10 @@ import { BsUpload } from "react-icons/bs"
 import { FiSend } from 'react-icons/fi'
 import { styles } from './styles'
 
-const MessageForm = ({ sendMessage, message, setMessage, setMedia }) => {
+const MessageForm = ({ sendMessage, message, setMessage, setMedia, media, chat, user1 }) => {
     const [chooseEmoji, setChooseEmoji] = useState(false)
     const emojiRef = useRef(null)
+
 
     function addEmoji(e) {
         let emoji = e.native;
@@ -36,7 +37,14 @@ const MessageForm = ({ sendMessage, message, setMessage, setMedia }) => {
     }, [emojiRef]);
 
     return (
-        <form className={styles.form} onSubmit={sendMessage} >
+        <form className={styles.form} onSubmit={(e) => sendMessage(e,
+            message,
+            media,
+            user1,
+            chat,
+            setMessage,
+            setMedia
+        )} >
 
             <label htmlFor="image">
                 <BsUpload className="text-red-300" style={{ cursor: "pointer" }} size={20} />
