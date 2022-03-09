@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Img from '../assets/image.jpg'
+
+// FIREBASE
 import { doc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 
+// STYLES
 import { styles } from './styles'
 
 

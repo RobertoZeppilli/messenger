@@ -1,12 +1,10 @@
 // REACT STUFF & REACT-ROUTER
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 
-// FIREBASE STUFF
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth, db } from '../firebase'
-import { updateDoc, doc } from 'firebase/firestore'
-import { Link } from 'react-router-dom'
+// FUNCTIONS
+import { handleLogin } from '../functions'
 
 // STYLES
 import { styles } from './styles'
@@ -22,34 +20,10 @@ const Login = () => {
 
     const { email, password, error, loading } = data
 
-
-    // #TODO refactor this function
-    async function handleSubmit(e) {
-        e.preventDefault()
-
-        setData({ ...data, error: null, loading: true })
-        if (!email || !password) {
-            setData({ ...data, error: 'All fields are required' })
-        }
-        try {
-            const result = await signInWithEmailAndPassword(auth, email, password)
-
-            await updateDoc(doc(db, 'users', result.user.uid), {
-                isOnline: true,
-            })
-
-            setData({ email: '', password: '', error: null, loading: false })
-
-            navigate('/')
-        } catch (err) {
-            setData({ ...data, error: err.message.replace(/[^\w\s]/gi, ' ') })
-        }
-    }
-
     return (
 
         <div className={styles.container}>
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={(e) => handleLogin(e, setData, data, email, password, navigate)}>
 
                 <div className="mb-4">
                     <label className={styles.label} htmlFor="email">

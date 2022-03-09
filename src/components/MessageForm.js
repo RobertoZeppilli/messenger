@@ -1,36 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 
+// EMOJI PICKER
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
 
-import { FiSmile } from 'react-icons/fi'
-import { BsUpload } from "react-icons/bs"
-import { FiSend } from 'react-icons/fi'
+// ICONS
+import {FiSmile, FiSend, BsUpload} from '../assets'
 import { styles } from './styles'
+
+// FUNCTIONS
+import { addEmoji } from '../functions'
 
 const MessageForm = ({ sendMessage, message, setMessage, setMedia, media, chat, user1 }) => {
     const [chooseEmoji, setChooseEmoji] = useState(false)
     const emojiRef = useRef(null)
-
-
-    function addEmoji(e) {
-        let emoji = e.native;
-        setMessage(message + emoji);
-    };
-
-
-    // #TODO refactor this function
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (emojiRef.current && !emojiRef.current.contains(event.target)) {
-                setChooseEmoji(false)
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [emojiRef]);
 
     return (
         <form className={styles.form} onSubmit={(e) => sendMessage(e,
@@ -55,7 +38,7 @@ const MessageForm = ({ sendMessage, message, setMessage, setMedia, media, chat, 
                 <Picker
                     exclude={["search"]}
                     theme="dark"
-                    onSelect={addEmoji}
+                    onSelect={(e) => addEmoji(e, setMessage, message)}
                     onClick={() => setChooseEmoji(false)}
                 />
             </div>}

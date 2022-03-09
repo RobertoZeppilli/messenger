@@ -3,12 +3,11 @@ import React, { useState, useEffect } from 'react'
 import { Camera, Trash } from '../components'
 import Img from '../assets/image.jpg'
 
-import { storage, db, auth } from '../firebase'
-import { ref, deleteObject } from 'firebase/storage'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { db, auth } from '../firebase'
+import { doc, getDoc } from 'firebase/firestore'
 
 import { useNavigate } from 'react-router-dom'
-import { uploadImg } from '../functions'
+import { uploadImg, deleteImage } from '../functions'
 
 import { styles } from './styles'
 import '../index.css'
@@ -21,7 +20,6 @@ const Profile = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(user)
         getDoc(doc(db, 'users', auth.currentUser.uid)).then(docSnap => {
             if (docSnap.exists) {
                 setUser(docSnap.data())
@@ -32,22 +30,6 @@ const Profile = () => {
             uploadImg(img, user, setImg)
         }
     }, [img])
-
-    const deleteImage = async () => {
-        try {
-            const confirm = window.confirm('Delete avatar?')
-            if (confirm) {
-                await deleteObject(ref(storage, user.avatarPath))
-                await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-                    avatar: "",
-                    avatarPath: ""
-                })
-                navigate('/')
-            }
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
 
     return user ? (
         <>
@@ -60,7 +42,7 @@ const Profile = () => {
                             <label htmlFor="photo" className="text-white">
                                 <Camera />
                             </label>
-                            {user.avatar ? <Trash deleteImage={deleteImage} /> : null}
+                            {user.avatar ? <Trash deleteImage={() => deleteImage(user, navigate)} /> : null}
                             <input type="file" accept="image/*" style={{ display: "none" }} id="photo" onChange={e => setImg(e.target.files[0])} />
                         </div>
                     </div>

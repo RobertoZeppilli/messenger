@@ -18,9 +18,9 @@ const Message = ({ message, user1, deleteMessage, chat }) => {
                 <p className={`${styles.message} ${message.from === user1 ? styles.myMessage : styles.senderMessage}`}>
                     {message.media ? <img className="h-12 w-12" src={message.media} alt={message.text} /> : null}
                     {message.message}
-                    {message.from === user1 && <span onClick={() => deleteMessage(message.messageID, chat, user1)} className={styles.deleteButton}>
+                    <span onClick={() => deleteMessage(message.messageID, chat, user1)} className={styles.deleteButton}>
                         <TiDelete size={20} />
-                    </span>}
+                    </span>
                 </p>
                 <small className="text-zinc-300 italic">
                     <Moment fromNow>

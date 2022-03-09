@@ -1,12 +1,10 @@
 // REACT STUFF AND REACT-ROUTER
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
-
-// FIREBASE STUFF
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth, db } from '../firebase'
-import { setDoc, doc, Timestamp } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
+
+// FUNCTIONS
+import { handleRegister } from '../functions'
 
 // STYLES
 import { styles } from './styles'
@@ -27,35 +25,9 @@ const Register = () => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-    // #TODO refactor this function
-    async function handleSubmit(e) {
-        e.preventDefault()
-
-        setData({ ...data, error: null, loading: true })
-        if (!name || !email || !password) {
-            setData({ ...data, error: 'All fields are required' })
-        }
-        try {
-            const result = await createUserWithEmailAndPassword(auth, email, password)
-
-            await setDoc(doc(db, 'users', result.user.uid), {
-                uid: result.user.uid,
-                name,
-                email,
-                createdAt: Timestamp.fromDate(new Date()),
-                isOnline: true,
-            })
-
-            setData({ name: '', email: '', password: '', error: null, loading: false })
-            navigate('/')
-        } catch (err) {
-            setData({ ...data, error: err.message })
-        }
-    }
-
     return (
         <div className={styles.container}>
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={(e) => handleRegister(e, setData, data, name, email, password, navigate)}>
 
                 <div className="mb-4">
                     <label className={styles.label} htmlFor="name">
@@ -77,7 +49,7 @@ const Register = () => {
                 </div>
                 {error ? <p className={styles.error}>{error}</p> : ''}
                 <div className={styles.formActions}>
-                    <button className={styles.formButton} type="button" disabled={loading}>
+                    <button className={styles.formButton} type="submit" disabled={loading}>
                         {loading ? "Registering..." : 'Register'}
                     </button>
                     <small>Have an account? <Link to="/login" className={styles.otherPage}>Login</Link></small>

@@ -3,35 +3,24 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-// FIREBASE STUFF
-import { auth, db } from '../firebase'
-import { signOut } from 'firebase/auth'
-import { doc, updateDoc } from 'firebase/firestore'
-
 // CONTEXT
 import { AuthContext } from '../context/auth'
 
 //STYLES
 import { styles } from './styles'
 
-import { AiOutlineUser } from 'react-icons/ai'
-import { FiLogOut } from 'react-icons/fi'
+// FUNCTIONS
+import { handleSignout } from '../functions'
+
+
+// ICONS
+import { AiOutlineUser, FiLogOut } from '../assets'
 
 const Navbar = () => {
 
     const { user } = useContext(AuthContext)
 
     const navigate = useNavigate()
-
-
-    // #TODO refactor this function
-    async function handleSignout() {
-        await updateDoc(doc(db, 'users', user.uid), {
-            isOnline: false
-        })
-        await signOut(auth)
-            .then(() => navigate('/login'))
-    }
 
     return (
         <nav className={styles.navbar}>
@@ -43,7 +32,7 @@ const Navbar = () => {
                     <Link to="/profile" className={styles.navButtonNoMargin}>
                         <AiOutlineUser size={20} />
                     </Link>
-                    <button className={styles.navButtonMargin} onClick={handleSignout}>
+                    <button className={styles.navButtonMargin} onClick={() => handleSignout(user, navigate)}>
                         <FiLogOut size={20} />
                     </button>
                 </> :
