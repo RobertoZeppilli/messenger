@@ -4,9 +4,11 @@ const navbar = `
     p-4
 `
 const logo = `
+    text-white
     font-bold
     text-2xl
-    text-white
+    hover:text-red-400
+    transition duration-150 ease-in-out
 `
 const navButtonNoMargin = `
     hover:text-red-300
@@ -48,9 +50,12 @@ const me = `
     self-end text-right
 `
 const message = `
-    px-5 py-3
+    px-6 py-4
     w-full
     rounded-md
+    relative
+    group
+    transition duration-150 ease-in-out
 `
 const myMessage = `
     bg-red-300
@@ -109,7 +114,7 @@ const emojiPicker = `
     inset-x-20
     bottom-1/4
 `
-
+const deleteButton = "text-red-200 ml-3 cursor-pointer absolute right-0 bottom-0 hidden group-hover:block transition duration-150 ease-in-out hover:text-red-600"
 
 
 
@@ -136,5 +141,6 @@ export const styles = {
     lastMessage,
     form,
     messageInput,
-    emojiPicker
+    emojiPicker,
+    deleteButton
 }

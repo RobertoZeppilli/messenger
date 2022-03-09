@@ -11,10 +11,14 @@ const Home = () => {
   const [users, setUsers] = useState([])
   const [chat, setChat] = useState("")
   const [message, setMessage] = useState("")
-  const [messages, setMessages] = useState([])
+  const [chatMessages, setChatMessages] = useState([])
   const [media, setMedia] = useState("")
+  // const [docId, setDocId] = useState("")
 
   const user1 = auth.currentUser.uid
+
+  // console.log(chatMessages?.conversations)
+  // console.log(docId)
 
   // query al db per chiamare tutti gli utenti tranne noi che siamo auth
   useEffect(() => {
@@ -42,9 +46,14 @@ const Home = () => {
     onSnapshot(Query, querySnapshot => {
       let msgs = []
       querySnapshot.forEach(doc => {
-        msgs.push(doc.data())
+        // const { message } = doc.data()
+        const message = doc.data()
+        message.messageID = doc.id
+        // doc.data().id = doc.id
+        console.log("DOC ", message)
+        msgs.push(message)
       })
-      setMessages(msgs)
+      setChatMessages(msgs)
     })
 
     // get last message only if there has been a past conversation b/w the logged in user and the conversation opened
@@ -97,24 +106,12 @@ const Home = () => {
     setMedia("")
   }
 
-  const deleteMessage = async (msg) => {
-    // const user2 = user.uid
+  const deleteMessage = async (messageID) => {
     const user2 = chat.uid
     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`
-    const msgRef = collection(db, 'messages', id, 'chat')
-    console.log(msgRef)
-    const Query = query(msgRef, orderBy('createdAt', 'asc'))
 
-    onSnapshot(Query, querySnapshot => {
-      // let msgs = []
-      querySnapshot.forEach(doc => {
-        // msgs.push(doc.data())
-        console.log(doc.id, doc.data())
-      })
-      // setMessages(msgs)
-    })
+    return await deleteDoc(doc(db, "messages", id, "chat", messageID))
 
-    // Ho il doc.id che servira per cancellare il messaggio!!!
   }
 
 
@@ -136,7 +133,7 @@ const Home = () => {
                 <h3 className="font-semibold">{chat.name}</h3>
               </div>
               <div className={styles.chatMessages}>
-                {messages.length ? messages.map((message, index) => <Message key={index} message={message} user1={user1} deleteMessage={deleteMessage} />) : ""}
+                {chatMessages ? chatMessages.map((message, index) => <Message key={index} message={message} user1={user1} deleteMessage={deleteMessage} />) : ""}
               </div>
               <div className={styles.chatForm}>
                 <MessageForm sendMessage={sendMessage} message={message} setMessage={setMessage} setMedia={setMedia} />

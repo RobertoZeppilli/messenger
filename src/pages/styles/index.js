@@ -95,7 +95,7 @@ const chatForm = `
     flex items-center justify-center
 `
 const noChat = `
-    text-white
+    text-red-400
     font-bold
     sm:text-3xl
     text-center

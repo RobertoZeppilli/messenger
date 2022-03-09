@@ -3,8 +3,12 @@ import Moment from 'react-moment'
 
 import { styles } from './styles'
 
+import { TiDelete } from 'react-icons/ti'
+
 const Message = ({ message, user1, deleteMessage }) => {
     const scrollRef = useRef(null)
+
+    // console.log(message)
 
     useEffect(() => {
         scrollRef.current && scrollRef.current.scrollIntoView({ behavior: "smooth" })
@@ -16,7 +20,9 @@ const Message = ({ message, user1, deleteMessage }) => {
                 <p className={`${styles.message} ${message.from === user1 ? styles.myMessage : styles.senderMessage}`}>
                     {message.media ? <img className="h-12 w-12" src={message.media} alt={message.text} /> : null}
                     {message.message}
-                    {message.from === user1 && <span onClick={() => deleteMessage(message)} className="text-red-200 ml-3 cursor-pointer">X</span>}
+                    {message.from === user1 && <span onClick={() => deleteMessage(message.messageID)} className={styles.deleteButton}>
+                        <TiDelete size={20} />
+                    </span>}
                 </p>
                 <small className="text-zinc-300 italic">
                     <Moment fromNow>
