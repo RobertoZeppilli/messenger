@@ -75,7 +75,7 @@ const newMessage = `
     animate-ping
     absolute
     bottom-2
-    left-12
+    right-0
 `
 const profileInfo = `
     flex flex-col
